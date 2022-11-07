@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Tabs } from 'antd';
 import Deposit from './components/Deposit';
 import './App.less';
+import Prize from './components/Prize';
 
 function App() {
 
@@ -32,7 +33,7 @@ function App() {
 
   const items = [
     { label: '项目 1', key: 'item-1', children: <Deposit poolContract={poolContract} generalInfo={generalInfo} /> }, // 务必填写 key
-    { label: '项目 2', key: 'item-2', children: '内容 2' },
+    { label: '项目 2', key: 'item-2', children: <Prize generalInfo={generalInfo} poolContract={poolContract} /> },
   ];
 
   return (

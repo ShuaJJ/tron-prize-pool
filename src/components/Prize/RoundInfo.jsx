@@ -1,15 +1,25 @@
-import { useContractReader } from "eth-hooks";
-import "./index.css";
 import { Button, Col, Divider, Row } from "antd";
-import { APP_NAME, RPC_POLL_TIME } from "../../constants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PPCountDown from "../CountDown";
 import TxHashLink from "../TxHashLink";
+import "./index.css";
 const { ethers } = require("ethers");
 
-export default function RoundInfo({ index, myWin, tx, writeContracts, readContracts }) {
+export default function RoundInfo({ index, myWin, poolContract }) {
   const [claimHash, setClaimHash] = useState();
-  const roundInfo = useContractReader(readContracts, APP_NAME, "roundRingBuffer", [index], RPC_POLL_TIME);
+  const [roundInfo, setRoundInfo] = useState();
+
+  const getRoundInfo = async () => {
+    const ri = await poolContract.roundRingBuffer(index).call();;
+    setRoundInfo(ri);
+  }
+
+  useEffect(() => {
+    getRoundInfo();
+  });
+
+
+
   var ethPrice, roundId, roundTotal, winningTotal;
   if (roundInfo) {
     roundId = roundInfo[0];
@@ -20,14 +30,10 @@ export default function RoundInfo({ index, myWin, tx, writeContracts, readContra
 
   const [loading, setLoading] = useState(false);
 
-  const check = () => {
+  const check = async () => {
     setLoading(true);
-    const result = tx(writeContracts.PricePrizePool.claim(roundId), update => {
-      if (update) {
-        setClaimHash(update.hash);
-      }
-      setLoading(false);
-    });
+    const result = await poolContract.claim(roundId).send({});
+    setLoading(false);
   };
 
   if (!roundId || roundId == 0 || ethPrice == 0) {
@@ -44,7 +50,7 @@ export default function RoundInfo({ index, myWin, tx, writeContracts, readContra
       </Row>
       <Row className="info-row">
         <Col className="info-col" flex="180px">
-          Final ETH Price
+          Final TRX Price
         </Col>
         <Col flex="auto">${ethPrice}</Col>
       </Row>
@@ -52,13 +58,13 @@ export default function RoundInfo({ index, myWin, tx, writeContracts, readContra
         <Col className="info-col" flex="180px">
           Round Total Deposit
         </Col>
-        <Col flex="auto">{roundTotal} ETH</Col>
+        <Col flex="auto">{roundTotal} TRX</Col>
       </Row>
       <Row className="info-row">
         <Col className="info-col" flex="230px">
           My Prize(In last 7 rounds)
         </Col>
-        <Col flex="auto">{winningTotal} ETH</Col>
+        <Col flex="auto">{winningTotal} TRX</Col>
       </Row>
       {winningTotal > 0 && (
         <div className="claim-info">

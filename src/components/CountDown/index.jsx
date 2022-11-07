@@ -16,13 +16,13 @@ export default function PPCountDown({ isPrize, generalInfo }) {
   if (isPrize) {
     date = betEndingTime + priceSetTime;
     completedText = "Please refresh to see the result";
-    extraInfo = "The final ETH price will be set and\nthe next round will start in";
+    extraInfo = "The final TRX price will be set and\nthe next round will start in";
   } else {
     if (now < betEndingTime) {
       date = betEndingTime;
       completedText = "Guessing time is over";
     } else {
-      extraInfo = "Guessing time is over! The final\nETH price will be set in";
+      extraInfo = "Guessing time is over! The final\nTRX price will be set in";
       completedText = "Please refresh to enter next round";
       date = betEndingTime + priceSetTime;
     }
