@@ -1,6 +1,7 @@
 .deposit-wrapper {
     margin: auto;
     width: 70vw;
+    text-align: center;
 }
 
 .balance-info {

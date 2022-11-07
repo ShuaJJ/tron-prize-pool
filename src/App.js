@@ -1,9 +1,10 @@
 import logo from './logo.svg';
 import { useEffect, useState } from 'react';
-import { Tabs } from 'antd';
+import { Tabs, Typography } from 'antd';
 import Deposit from './components/Deposit';
 import './App.less';
 import Prize from './components/Prize';
+const { Title } = Typography;
 
 function App() {
 
@@ -32,12 +33,17 @@ function App() {
   }, [poolContract]);
 
   const items = [
-    { label: '项目 1', key: 'item-1', children: <Deposit poolContract={poolContract} generalInfo={generalInfo} /> }, // 务必填写 key
-    { label: '项目 2', key: 'item-2', children: <Prize generalInfo={generalInfo} poolContract={poolContract} /> },
+    { label: 'Deposit', key: 'depoist', children: <Deposit poolContract={poolContract} generalInfo={generalInfo} /> }, // 务必填写 key
+    { label: 'Prizes', key: 'prizes', children: <Prize generalInfo={generalInfo} poolContract={poolContract} /> },
   ];
 
   return (
     <div className="App">
+       <div className="logo">
+            <Title level={6} style={{ margin: "0 0.5rem 0 0" }}>
+              <img alt="logo" style={{ width: "60px", marginRight: "8px" }} src="/logo.png" /> Price Prize Pool
+            </Title>
+        </div>
       <Tabs items={items} />
     </div>
   );
