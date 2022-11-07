@@ -1,23 +1,43 @@
 import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import { Tabs } from 'antd';
+import Deposit from './components/Deposit';
+import './App.less';
 
 function App() {
+
+  const [poolContract, setPoolContract] = useState();
+  const [generalInfo, setGeneralInfo] = useState();
+
+  const setupPoolContract = async () => {
+      const pc = await        
+      window.tronWeb.contract().at('TL2u1mr95NeRg4rSHRGCfxeESdc9CEHMwM');
+      setPoolContract(pc);
+  }
+
+  const getGeneralInfo = async () => {
+    if (poolContract) {
+      const gi  = await poolContract.generalInfo().call();
+      setGeneralInfo(gi);
+    }
+  }
+
+  useEffect(() => {
+    setupPoolContract();
+  }, []);
+
+  useEffect(() => {
+    getGeneralInfo();
+  }, [poolContract]);
+
+  const items = [
+    { label: '项目 1', key: 'item-1', children: <Deposit poolContract={poolContract} generalInfo={generalInfo} /> }, // 务必填写 key
+    { label: '项目 2', key: 'item-2', children: '内容 2' },
+  ];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Tabs items={items} />
     </div>
   );
 }
