@@ -64,10 +64,11 @@ export default function Deposit({poolContract, generalInfo}) {
       <div className="pool-balance">{roundTotal && ethers.utils.formatUnits(roundTotal, 6)} TRX</div>
       <div className="balance-info">IN PRIZE POOL</div>
       <div className="deposit-form">
+        <div className="example" style={{fontWeight: "700", marginBottom: "4px"}}>Example: To guess the price of TRX is $0.06097, just fill in 6097</div>
         <Input
           addonBefore="USD"
           type="number"
-          placeholder="Just guess the first 4 digits except 0 right"
+          placeholder="Example: 6097"
           onChange={onGuessChange}
           value={guess}
         />

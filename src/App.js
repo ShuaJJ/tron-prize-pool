@@ -13,7 +13,7 @@ function App() {
 
   const setupPoolContract = async () => {
       const pc = await        
-      window.tronWeb.contract().at('TL2u1mr95NeRg4rSHRGCfxeESdc9CEHMwM');
+      window.tronWeb.contract().at('TYHBoccYtA9RULKXBgbfQsWjStRAFgQPak');
       setPoolContract(pc);
   }
 
@@ -41,7 +41,7 @@ function App() {
     <div className="App">
        <div className="logo">
             <Title level={6} style={{ margin: "0 0.5rem 0 0" }}>
-              <img alt="logo" style={{ width: "60px", marginRight: "8px" }} src="/logo.png" /> Price Prize Pool
+              <img alt="logo" style={{ width: "60px", marginRight: "8px" }} src="/logo.png" /> Tron Prize Pool
             </Title>
         </div>
       <Tabs items={items} />

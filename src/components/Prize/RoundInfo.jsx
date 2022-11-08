@@ -24,8 +24,8 @@ export default function RoundInfo({ index, myWin, poolContract }) {
   if (roundInfo) {
     roundId = roundInfo[0];
     ethPrice = roundInfo[1];
-    roundTotal = ethers.utils.formatEther(roundInfo[2]);
-    winningTotal = ethers.utils.formatEther(myWin);
+    roundTotal = ethers.utils.formatUnits(roundInfo[2], 6);
+    winningTotal = ethers.utils.formatUnits(myWin, 6);
   }
 
   const [loading, setLoading] = useState(false);
@@ -52,7 +52,7 @@ export default function RoundInfo({ index, myWin, poolContract }) {
         <Col className="info-col" flex="180px">
           Final TRX Price
         </Col>
-        <Col flex="auto">${ethPrice}</Col>
+        <Col flex="auto">${ethPrice / 10**5}</Col>
       </Row>
       <Row className="info-row">
         <Col className="info-col" flex="180px">
