@@ -84,7 +84,7 @@ export default function Deposit({poolContract, generalInfo}) {
         </Button>
         <TxHashLink hash={depositHash} />
         <a
-          href="https://jojos-metaverse.gitbook.io/priceprizepool/"
+          href="https://jojos-metaverse.gitbook.io/tron-prize-pool/"
           target="_blank"
           className="instructions"
           rel="noreferrer"

@@ -13,7 +13,7 @@ function App() {
 
   const setupPoolContract = async () => {
       const pc = await        
-      window.tronWeb.contract().at('TYHBoccYtA9RULKXBgbfQsWjStRAFgQPak');
+      window.tronWeb.contract().at('TNRmUiD22YytRhqAbosQWL7uyqS5D4Rm4T');
       setPoolContract(pc);
   }
 
@@ -44,7 +44,7 @@ function App() {
               <img alt="logo" style={{ width: "60px", marginRight: "8px" }} src="/logo.png" /> Tron Prize Pool
             </Title>
         </div>
-      <Tabs items={items} />
+      {poolContract ? <Tabs items={items} /> : <div style={{textAlign: "center"}}>Please refresh to connect to TRON Nile Testnet first</div>}
     </div>
   );
 }
